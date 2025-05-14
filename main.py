@@ -32,11 +32,12 @@ def get_clients(skip: int = 0, limit: int = 100, db=Depends(get_db))->list[Clien
     return clients[skip:skip+limit]
 
 @client_router.get("/{client_id}/commandes")
-def read_client_commende(client_id:int, db=Depends(get_db)):
-        client_data = db.query(Client).filter(Client.id_client == client_id).first()
-        if not client_data:
-            raise HTTPException(status_code=404, detail=f"Le client avec l'id={client_id} n'existe pas")
-        return client_data.commandes
+def read_client_commande(client_id:int, db=Depends(get_db))->list[Commande]:
+    client_data = db.query(Client).filter(Client.id_client == client_id).first()
+    if not client_data:
+        raise HTTPException(status_code=404, detail=f"Le client avec l'id={client_id} n'existe pas")
+    print(client_data.commandes)
+    return client_data.commandes
 
 @client_router.get("/{client_id}")
 def get_client(client_id:int, db=Depends(get_db))->Client:

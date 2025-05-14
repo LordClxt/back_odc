@@ -22,7 +22,7 @@ class ClientUpdate(ClientBase):
 
 class Client(ClientBase):
     id_client:int
-    commandes:list[models.Commande] = []
+    commandes:list[models.Commande]
     
     
 
