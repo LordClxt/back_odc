@@ -4,6 +4,7 @@ from database import engine
 from sqlalchemy.orm import Session
 from models import Client, Commande, Produit, Ligne_Commande, Base
 import shemas
+from datetime import datetime
 
 def get_db():
     with Session(engine) as session:
@@ -150,7 +151,7 @@ def get_commande(commande_id:int, db=Depends(get_db))->Commande:
 @commande_router.post("/")
 def create_commande(commande:shemas.CommandeCreate, db=Depends(get_db))->bool:
     
-    create_commande = Commande(**commande.model_dump())
+    create_commande = Commande(id_client=commande.id_client, montant_total=commande.montant_total, statut="Livré")
     db.add(create_commande)
     db.commit()
     return True

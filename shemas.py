@@ -49,7 +49,6 @@ class Produit(ProduitBase):
 
 class CommandeBase(BaseModel):
     id_client: int
-    date_commande: str
     montant_total: float
     statut: Literal["Livré", "Expédié", "En préparation", "En attente"]
 
