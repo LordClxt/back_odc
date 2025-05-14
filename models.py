@@ -56,7 +56,7 @@ class Commande(Base):
     __tablename__ = "commande"
     id_commande: Mapped[int] = mapped_column(init=False, primary_key=True, repr=False)
     id_client: Mapped[int] = mapped_column(ForeignKey("client.id_client"))
-    date_commande: Mapped[datetime] = mapped_column(insert_default=datetime.now())
+    date_commande: Mapped[datetime] = mapped_column(insert_default=datetime.now(), init=False)
     montant_total: Mapped[float]
     statut: Mapped[str] = mapped_column(
         Enum("Livré", "Expédié", "En préparation", "En attente"),
