@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter, HTTPException, Depends
-
+from fastapi.middleware.cors import CORSMiddleware
 from database import engine
 from sqlalchemy.orm import Session
 from models import Client, Commande, Produit, Ligne_Commande, Base
@@ -12,6 +12,13 @@ def get_db():
 
 app = FastAPI()
 Base.metadata.create_all(engine)
+
+
+app.add_middleware( CORSMiddleware, 
+                   allow_origins=["*"], 
+                   allow_credentials=True,
+                   allow_methods=["*"], allow_headers=["*"]
+                   )
 client_router = APIRouter(
     tags=["CLIENTS"],
     prefix="/clients"
