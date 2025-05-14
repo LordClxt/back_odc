@@ -54,13 +54,13 @@ class CommandeBase(BaseModel):
     statut: Literal["Livré", "Expédié", "En préparation", "En attente"]
 
 
-class CommandeCreate(ProduitBase):
+class CommandeCreate(CommandeBase):
     pass
 
-class CommandeUpdate(ProduitBase):
+class CommandeUpdate(CommandeBase):
     pass
 
-class Commande(ProduitBase):
+class Commande(CommandeBase):
     id_commande:int
     class Config:
         orm_mode = True 
@@ -73,13 +73,13 @@ class LigneCommandeBase(BaseModel):
     quantite: int
     prix_unitaire: float
 
-class LigneCommandeCreate(ProduitBase):
+class LigneCommandeCreate(LigneCommandeBase):
     pass
 
-class LigneCommandeUpdate(ProduitBase):
+class LigneCommandeUpdate(LigneCommandeBase):
     pass
 
-class LigneCommande(ProduitBase):
+class LigneCommande(LigneCommandeBase):
     id_ligne:int
     class Config:
         orm_mode = True 
